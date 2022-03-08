@@ -5,7 +5,7 @@
 % Inputs:
 % beta0 - initial guess for initial condition parameter
 % T - integration time (fixed)
-% ep - initial step size away from equilibrium point
+% eps - initial step size away from equilibrium point
 % q_eq - equilibrium point (row vector)
 % t1 - one of the tangent vectors (row vector)
 % t2 - other tangent vector
@@ -20,7 +20,6 @@
 % Yf - final y coordinate
 % THf - final theta coordinate
 % nf - final normal vector to manifold (normalized)
-% fval,exitFlag,output - outputs of fsolve/fzero
 % dobj - derivative of the objective function at the solution
 function [beta,Xf,Yf,THf,nf,fval,exitFlag,output,dobj] = swimEdge0_det_fixedT(beta0,T,ep,q_eq,t1,t2,v0,alpha,flow,tols)
 %% compute intial condition of trajectory going to SwIM edge in time T

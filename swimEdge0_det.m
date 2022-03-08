@@ -5,11 +5,11 @@
 % sin(beta)*t2), where (T,beta) = (T0,beta0) + ep0*(cos(gamma),sin(gamma)).
 % Objective function = det(d r/ d(T,\beta))
 % Inputs:
-% gamma0 - initial guess for angle parameter
+% gamma0 - initial guess for time/intial condition parameter
 % T0 - known hitting time for the initial condition beta0
 % beta0 - known initial condition parameter
 % ep - initial step size away from equilibrium
-% ep0 - initial step size away from known point in (T,beta) plane
+% ep0 - initial step size away from known point
 % q_eq - equilibrium point (row vector)
 % t1 - one of the tangent vectors (row vector)
 % t2 - other tangent vector
@@ -19,14 +19,13 @@
 % tols - numerical integration tolerances
 %
 % Outputs:
-% gamma - final angle parameter
+% gamma - final initial condition parameter
 % T - final hitting time
 % beta - final inital condition
 % Xf - final x coordinate on SwIM edge
 % Yf - final y coordinate
 % THf - final theta coordinate
 % nf - final normal vector to manifold (normalized)
-% fval,exitFlag,output - outputs of fzero
 % dobj - derivative of the objective function at the solution
 function [gamma,T,beta,Xf,Yf,THf,nf,fval,exitFlag,output,dobj] = swimEdge0_det(gamma0,T0,beta0,ep,ep0,q_eq,t1,t2,v0,alpha,flow,tols)
 %% compute intial condition of trajectory going to SwIM edge in time T
@@ -34,7 +33,7 @@ function [gamma,T,beta,Xf,Yf,THf,nf,fval,exitFlag,output,dobj] = swimEdge0_det(g
 % opt = optimoptions('fsolve','Display','iter-detailed','OptimalityTolerance',1e-8);
 % [gamma,fval,exitFlag,output,dobj] = fsolve(@objective,gamma0,opt);
 %% fzero
-opt = optimset('Display','iter','TolX',1e-9);
+opt = optimset('Display','iter');
 [gamma,fval,exitFlag,output] = fzero(@objective,gamma0,opt);
 dobj = 0;
 

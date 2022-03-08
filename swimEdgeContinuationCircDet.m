@@ -12,13 +12,11 @@
 % beta0 - initial guess for swimmer initial condition parameter
 % T0 - initial integration time
 % arcmax - maximum arclength of curve in (T,beta) plane
-% dT - step size for time coordinate for second solution (optional)
-% ep0 - initial step size in (T,beta) plane (optional)
-% epMin - threshold for minimum step size (optional)
+% dEp - step in perturbation parameter (optional)
 %
 % Outputs:
-% gammac - angle parameter in (T,beta) plane
-% epc - step size
+% gammac - perturbation parameter
+% epc - perturbation size
 % betac - initial condition parameters leading to fold
 % Xfc - x coordinate on fold
 % Yfc - y coordinate on fold
@@ -42,7 +40,7 @@ if nargin < 12
     epMin = 1e-8; % minimum threshold for perturbation step
 end
 
-gamma0 = 0; % initial guess for angle parameter
+gamma0 = 0; % initial guess for perturbation parameter
 % vectors to store along continuation
 gammac = [];
 Tc = []; 
@@ -125,11 +123,7 @@ while arc < arcmax
         disp('Terminated because ep0 fell below threshold.')
         break
     end
-    % increase step up to a threshold if 
-    % a) converged to previous solution sufficiently fast &&
-    % b) ep0 is not too large &&
-    % c) the difference between current and previous gamma is sufficiently
-    % small
+    % increase step up to a threshold if dgamma and other thresholds met
     if output.iterations < 10 && 1.2*ep0 < 0.2 && abs(gamma - gammac(end)) < 1e-3
         ep0 = 1.2*ep0;
     end
